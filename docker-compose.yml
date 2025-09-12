@@ -9,7 +9,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./conduit-backend:/app
+      - bknd-data:/app
     restart: on-failure
 
   conduit-frontend:
@@ -26,6 +26,9 @@ services:
     env_file:
       - .env
     restart: on-failure
+
+volumes:
+  bknd-data: {}
 
 networks:
   conduit-net:

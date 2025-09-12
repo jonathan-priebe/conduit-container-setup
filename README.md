@@ -36,6 +36,11 @@ Before running this project, make sure the following tools are installed on your
     git clone https://github.com/Jonathan-Priebe/Conduit-Container-Setup.git
     cd Conduit-Container-Setup
     ```
+    Get the submodules also:
+    ```bash
+    git submodule add -b dev-abgabe https://github.com/Jonathan-Priebe/conduit-frontend.git conduit-frontend
+    git submodule add -b dev-abgabe https://github.com/Jonathan-Priebe/conduit-backend.git conduit-backend
+    ```
 
 All key settings are controlled via environment variables and Docker volumes. You can adjust them in the [Docker-Compose](./docker-compose.yml) file.
 
