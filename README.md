@@ -50,7 +50,7 @@ All key settings are controlled via environment variables and Docker volumes. Yo
 > ```
 > Then adjust the values to match your desired setup.
 
-2. **Run Container with Dcoker Compose**
+2. **Run Container with Docker Compose**
 
   ```bash
   docker compose up --build -d
