@@ -1,0 +1,35 @@
+services:
+  conduit-backend:
+    build:
+      context: ./conduit-backend
+      dockerfile: Dockerfile
+    container_name: conduit-backend
+    networks:
+      - conduit-net
+    env_file:
+      - .env
+    volumes:
+      - bknd-data:/app
+    restart: on-failure
+
+  conduit-frontend:
+    build:
+      context: ./conduit-frontend
+      dockerfile: Dockerfile
+      args:
+        API_URL: ${API_URL}
+    container_name: conduit-frontend
+    networks:
+      - conduit-net
+    ports:
+      - "8282:80"
+    env_file:
+      - .env
+    restart: on-failure
+
+volumes:
+  bknd-data: {}
+
+networks:
+  conduit-net:
+    driver: bridge
