@@ -109,3 +109,4 @@ http://YOUR_IP_OR_DOMAIN:YOUR_FRONTEND_PORT
 
 - Created and maintained by Jonathan 
 - 📫 Reach me via GitHub or [LinkedIn](https://www.linkedin.com/in/jonathan-p-34471b1a5/)
+# Test CI trigger
