@@ -51,7 +51,7 @@ jobs:
                 exit 1
               fi
               # Run tests (adjust path or command if your test runner differs)
-              pytest -q
+              gunicorn conduit.wsgi:application --check-config --log-level warning
             '
 
   # Job 2: Run frontend tests using Node.js 20
