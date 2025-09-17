@@ -41,7 +41,7 @@ jobs:
             -v "${{ github.workspace }}:/app" \
             -w "/app/${{ env.BACKEND_DIR }}" \
             -e CORS_ALLOWED_ORIGINS="http://localhost" \
-            -e SECRET_KEY="ci-placeholder-key" \
+            -e SECRET_KEY_Django="ci-placeholder-key" \
             python:3.5 \
             bash -c '
               set -e
