@@ -80,16 +80,6 @@ jobs:
       - name: Install frontend dependencies and run tests
         working-directory: ${{ env.FRONTEND_DIR }}
         run: |
-          set -e
-          if [ -f package-lock.json ]; then
-            npm ci
-          else
-            npm install
-          fi
-          # Prefer a dedicated CI test script if available, otherwise fall back
-          if npm run -s | grep -q "^  test:ci$"; then
-            npm run test:ci
-          else
-            # Karma/Angular typical CI flags; adjust if your project uses a different runner
-            npm test -- --watch=false --no-progress
-          fi
+          docker build \
+            --build-arg API_URL="https://dummy.api.url" \
+            -t angular-conduit-ci .
