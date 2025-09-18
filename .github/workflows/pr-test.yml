@@ -45,14 +45,14 @@ jobs:
             python:3.5 \
             bash -c '
               set -e
-              # Install dependencies (adjust filename here if you use a custom one like requirements-dev.txt)
+              # Install dependencies
               if [ -f requirements.txt ]; then
                 pip install -r requirements.txt
               else
                 echo "requirements.txt not found in $PWD" >&2
                 exit 1
               fi
-              # Run tests (adjust path or command if your test runner differs)
+              # Run tests
               gunicorn conduit.wsgi:application --check-config --log-level warning
             '
 
