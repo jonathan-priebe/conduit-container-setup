@@ -6,8 +6,8 @@ services:
     container_name: conduit-backend
     networks:
       - conduit-net
-    env_file:
-      - .env
+    # env_file:
+    #   - .env
     volumes:
       - bknd-data:/app
     restart: on-failure
@@ -23,8 +23,8 @@ services:
       - conduit-net
     ports:
       - "8282:80"
-    env_file:
-      - .env
+    # env_file:
+    #   - .env
     restart: on-failure
 
 volumes:
