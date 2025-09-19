@@ -10,7 +10,7 @@ on:
 env:
   BACKEND_NAME: conduit-backend         # Used as backend folder and image name
   FRONTEND_NAME: conduit-frontend       # Used as frontend folder and image name
-  CORS_ALLOWED_ORIGINS: http://localhost  # Dummy CORS origin for backend
+  CORS_ALLOWED_ORIGINS: http://localhost:8282  # Dummy CORS origin for backend
   SECRET_KEY_Django: ci-placeholder-key   # Dummy secret key for Django
   API_URL: https://dummy.api.url          # Dummy API URL for frontend build
 
