@@ -91,13 +91,6 @@ All key settings are controlled via environment variables and Docker volumes. Yo
 
 ---
 
-### 📦 Frontend Configuration (Angular)
-
-| Variable               | Description                                      |
-|------------------------|--------------------------------------------------|
-| `FRONTEND_PORT`        | Port exposed for Angular frontend                |
-| `FRONTEND_API_URL`     | Full URL to access backend API from frontend     |
-
 3. **🚀 Access Conduit App/Interface**
 
 - Once running, access the **Angular Frontend** at:
