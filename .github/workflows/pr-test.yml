@@ -54,8 +54,11 @@ jobs:
           -e DJANGO_SUPERUSER_PASSWORD="${{ env.DJANGO_SUPERUSER_PASSWORD }}" \
           ${{ env.BACKEND_NAME }}
       
-
-      - name:
+      - name: check workdir
+        run: |
+          pwd
+          
+      - name: checker for file
         run: |
           cat /ci_artifacts/ci_status.txt
       
