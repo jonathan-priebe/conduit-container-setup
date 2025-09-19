@@ -8,6 +8,7 @@ on:
 
 # Shared environment variables used across all jobs
 env:
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
   BACKEND_NAME: conduit-backend         # Used as backend folder and image name
   FRONTEND_NAME: conduit-frontend       # Used as frontend folder and image name
   CORS_ALLOWED_ORIGINS: http://localhost:8282  # Dummy CORS origin for backend
@@ -53,14 +54,6 @@ jobs:
           -e DJANGO_SUPERUSER_EMAIL="${{ env.DJANGO_SUPERUSER_EMAIL }}" \
           -e DJANGO_SUPERUSER_PASSWORD="${{ env.DJANGO_SUPERUSER_PASSWORD }}" \
           ${{ env.BACKEND_NAME }}
-      
-      - name: check workdir
-        run: |
-          pwd
-
-      - name: checker for file
-        run: |
-          cat ci_artifacts/ci_status.txt
       
       # Check the CI status for Backend
       - name: Check CI status
