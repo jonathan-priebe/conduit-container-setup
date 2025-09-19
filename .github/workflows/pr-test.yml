@@ -57,16 +57,16 @@ jobs:
       - name: check workdir
         run: |
           pwd
-          
+
       - name: checker for file
         run: |
-          cat /ci_artifacts/ci_status.txt
+          cat ci_artifacts/ci_status.txt
       
       # Check the CI status for Backend
       - name: Check CI status
         run: |
-          if [ -f /ci_artifacts/ci_status.txt ]; then
-            source /ci_artifacts/ci_status.txt
+          if [ -f ci_artifacts/ci_status.txt ]; then
+            source ci_artifacts/ci_status.txt
             if [ "$CI_SUCCESS" = "true" ]; then
               echo "CI confirmed: Gunicorn config passed."
             else
