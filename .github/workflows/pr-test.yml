@@ -44,6 +44,7 @@ jobs:
       # Run backend container to check if Gunicorn starts correctly
       - name: Run backend container
         run: |
+          cat entrypoint.sh && \
           docker run --rm \
           -e CI_MODE=true \
           -e CORS_ALLOWED_ORIGINS="${{ env.CORS_ALLOWED_ORIGINS }}" \
