@@ -50,7 +50,8 @@ jobs:
           -e DJANGO_SUPERUSER_USERNAME="${{ env.DJANGO_SUPERUSER_USERNAME }}" \
           -e DJANGO_SUPERUSER_EMAIL="${{ env.DJANGO_SUPERUSER_EMAIL }}" \
           -e DJANGO_SUPERUSER_PASSWORD="${{ env.DJANGO_SUPERUSER_PASSWORD }}" \
-          ${{ env.BACKEND_NAME }}
+          ${{ env.BACKEND_NAME }}\
+          gunicorn conduit.wsgi:application --check-config --log-level warning
 
   frontend-tests:
     runs-on: ubuntu-latest
