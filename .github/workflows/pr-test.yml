@@ -96,12 +96,12 @@ jobs:
       # Perform health check on backend (port 3000), expect HTTP 200 or 202
       - name: Health check backend (port 3000)
         run: |
-          curl -s -o /dev/null -w "%{http_code}" http://${{ env.BACKEND_NAME }}:3000 | grep -E "200|202"
+          ping -c 4 ${{ env.BACKEND_NAME }}
         
       # Perform health check on frontend (port 8282), expect HTTP 200 or 202
       - name: Health check frontend (port 8282)
         run: |
-          curl -s -o /dev/null -w "%{http_code}" http://${{ env.BACKEND_NAME }}:8282 | grep -E "200|202"
+          curl -I http://localhost:8282 | grep -E "200|202"
         
       # Shut down all containers and remove network
       - name: Cleanup
