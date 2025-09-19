@@ -71,6 +71,19 @@ jobs:
             exit 1
           fi
 
+      - name: Test GitHub Issue creation
+        if: always()
+        run: |
+          curl -s -X POST \
+            -H "Authorization: token $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -d '{
+              "title": "🔧 CI Manual Test Issue",
+              "body": "This issue was manually triggered to test GitHub API integration.",
+              "labels": ["ci", "manual-test"]
+            }' \
+            https://api.github.com/repos/Jonathan-Priebe/conduit-backend/issues
+
   frontend-tests:
     runs-on: ubuntu-latest
 
