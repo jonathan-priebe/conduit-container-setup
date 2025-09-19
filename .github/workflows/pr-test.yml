@@ -54,6 +54,11 @@ jobs:
           -e DJANGO_SUPERUSER_PASSWORD="${{ env.DJANGO_SUPERUSER_PASSWORD }}" \
           ${{ env.BACKEND_NAME }}
       
+
+      - name:
+        run: |
+          cat /ci_artifacts/ci_status.txt
+      
       # Check the CI status for Backend
       - name: Check CI status
         run: |
