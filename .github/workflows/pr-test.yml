@@ -45,6 +45,7 @@ jobs:
       - name: Run backend container
         run: |
           docker run --rm \
+          -v $(pwd)/ci_artifacts:/ci_artifacts \
           -e CI_MODE=true \
           -e CORS_ALLOWED_ORIGINS="${{ env.CORS_ALLOWED_ORIGINS }}" \
           -e SECRET_KEY_Django="${{ env.SECRET_KEY_Django }}" \
