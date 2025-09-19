@@ -83,7 +83,7 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
-
+      
       # Start frontend and backend containers using Docker Compose
       - name: Start fullstack setup via Docker Compose
         run: |
@@ -96,12 +96,12 @@ jobs:
       # Perform health check on backend (port 3000), expect HTTP 200 or 202
       - name: Health check backend (port 3000)
         run: |
-          curl -s -o /dev/null -w "%{http_code}" http://localhost:3000 | grep -E "200|202"
+          curl -s -o /dev/null -w "%{http_code}" http://${{ env.BACKEND_NAME }}:3000 | grep -E "200|202"
         
       # Perform health check on frontend (port 8282), expect HTTP 200 or 202
       - name: Health check frontend (port 8282)
         run: |
-          curl -s -o /dev/null -w "%{http_code}" http://localhost:8282 | grep -E "200|202"
+          curl -s -o /dev/null -w "%{http_code}" http://${{ env.BACKEND_NAME }}:8282 | grep -E "200|202"
         
       # Shut down all containers and remove network
       - name: Cleanup
