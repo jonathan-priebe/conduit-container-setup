@@ -52,6 +52,22 @@ jobs:
           -e DJANGO_SUPERUSER_EMAIL="${{ env.DJANGO_SUPERUSER_EMAIL }}" \
           -e DJANGO_SUPERUSER_PASSWORD="${{ env.DJANGO_SUPERUSER_PASSWORD }}" \
           ${{ env.BACKEND_NAME }}
+      
+      # Check the CI status for Backend
+      - name: Check CI status
+        run: |
+          if [ -f /tmp/ci_status.txt ]; then
+            source /tmp/ci_status.txt
+            if [ "$CI_SUCCESS" = "true" ]; then
+              echo "CI confirmed: Gunicorn config passed."
+            else
+              echo "CI failed: Gunicorn config check failed."
+              exit 1
+            fi
+          else
+            echo "CI status file missing. Assuming failure."
+            exit 1
+          fi
 
   frontend-tests:
     runs-on: ubuntu-latest
