@@ -6,80 +6,64 @@ on:
   pull_request:
     branches: [main, dev-abgabe]
 
-# Define shared directories for clarity and easy changes
+# Shared environment variables used across all jobs
 env:
-  BACKEND_DIR: conduit-backend
-  FRONTEND_DIR: conduit-frontend
+  BACKEND_NAME: conduit-backend         # Used as backend folder and image name
+  FRONTEND_NAME: conduit-frontend       # Used as frontend folder and image name
+  CORS_ALLOWED_ORIGINS: http://localhost  # Dummy CORS origin for backend
+  SECRET_KEY_Django: ci-placeholder-key   # Dummy secret key for Django
+  API_URL: https://dummy.api.url          # Dummy API URL for frontend build
 
 jobs:
-  # Job 1: Run backend tests using Python 3.5 inside a Docker container
   backend-tests:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository including submodules (frontend and backend)
-      - name: Checkout repository with submodules
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          fetch-depth: 0  # Ensures submodules fetch correctly for all refs
-
-      # Step 2: Show repo structure for quick debugging if paths are off
-      - name: List repository structure
-        run: |
-          echo "Root:"
-          ls -la
-          echo "Backend dir:"
-          ls -la "${{ env.BACKEND_DIR }}" || true
-          echo "Frontend dir:"
-          ls -la "${{ env.FRONTEND_DIR }}" || true
-
-      # Step 3: Run backend tests inside a Python 3.5 Docker container
-      - name: Run backend tests in Python 3.5 container
-        run: |
-          docker run --rm \
-            -v "${{ github.workspace }}:/app" \
-            -w "/app/${{ env.BACKEND_DIR }}" \
-            -e CORS_ALLOWED_ORIGINS="http://localhost" \
-            -e SECRET_KEY_Django="ci-placeholder-key" \
-            python:3.5 \
-            bash -c '
-              set -e
-              # Install dependencies
-              if [ -f requirements.txt ]; then
-                pip install -r requirements.txt
-              else
-                echo "requirements.txt not found in $PWD" >&2
-                exit 1
-              fi
-              # Run tests
-              gunicorn conduit.wsgi:application --check-config --log-level warning
-            '
-
-  # Job 2: Run frontend tests using Node.js 20
-  frontend-tests:
-    runs-on: ubuntu-latest
-
-    steps:
-      # Step 1: Checkout the repository including submodules
-      - name: Checkout repository with submodules
+      # Checkout repository including submodules
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           submodules: recursive
           fetch-depth: 0
 
-      # Step 2: Set up Node.js 20 for Angular frontend with npm cache
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      # Build backend Docker image
+      - name: Build backend image
+        uses: docker/build-push-action@v3
         with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: '${{ env.FRONTEND_DIR }}/package-lock.json'
+          context: ${{ env.BACKEND_NAME }}
+          file: ${{ env.BACKEND_NAME }}/Dockerfile
+          push: false
+          tags: ${{ env.BACKEND_NAME }}
+          build-args: |
+            CORS_ALLOWED_ORIGINS=${{ env.CORS_ALLOWED_ORIGINS }}
+            SECRET_KEY_Django=${{ env.SECRET_KEY_Django }}
 
-      # Step 3: Install frontend dependencies and run Angular tests in CI mode
-      - name: Install frontend dependencies and run tests
-        working-directory: ${{ env.FRONTEND_DIR }}
-        run: |
-          docker build \
-            --build-arg API_URL="https://dummy.api.url" \
-            -t angular-conduit-ci .
+      # Run backend container to check if Gunicorn starts correctly
+      - name: Run backend container
+        run: docker run --rm ${{ env.BACKEND_NAME }}
+
+  frontend-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository including submodules
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      # Build frontend Docker image
+      - name: Build frontend image
+        uses: docker/build-push-action@v3
+        with:
+          context: ${{ env.FRONTEND_NAME }}
+          file: ${{ env.FRONTEND_NAME }}/Dockerfile
+          push: false
+          tags: ${{ env.FRONTEND_NAME }}
+          build-args: |
+            API_URL=${{ env.API_URL }}
+
+      # Run frontend container to check if Nginx starts correctly
+      - name: Run frontend container
+        run: docker run --rm ${{ env.FRONTEND_NAME }}
