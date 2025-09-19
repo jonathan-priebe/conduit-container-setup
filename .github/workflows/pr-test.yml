@@ -83,15 +83,11 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
-        
 
-      - name: pdw check
-        run: |
-          ls -la    
       # Start frontend and backend containers using Docker Compose
       - name: Start fullstack setup via Docker Compose
         run: |
-          docker-compose -f docker-compose.yml up -d --build
+          docker compose -f docker-compose.yml up -d --build
         
       # Wait briefly to allow services to initialize
       - name: Wait for services to stabilize
