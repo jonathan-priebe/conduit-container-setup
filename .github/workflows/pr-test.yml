@@ -17,7 +17,7 @@ env:
   DJANGO_SUPERUSER_USERNAME: YOUR_ADMIN_USERNAME       # Dummy User for Backend 
   DJANGO_SUPERUSER_EMAIL: YOUR_ADMIN_EMAIL@example.local # Dummy Email for Backend
   DJANGO_SUPERUSER_PASSWORD: YOUR_ADMIN_PASSWORD  # Dummy Password for Backend
-  #IP_ADDR: localhost
+  IP_ADDR: localhost
 
 jobs:
   backend-tests:
@@ -83,6 +83,19 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+      
+      # Generate .env file from workflow environment variables
+      - name: Generate .env file
+        run: |
+          cat > .env <<EOF
+          CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS}
+          SECRET_KEY_Django=${SECRET_KEY_Django}
+          API_URL=${API_URL}
+          DJANGO_SUPERUSER_USERNAME=${DJANGO_SUPERUSER_USERNAME}
+          DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL}
+          DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}
+          IP_ADDR=${IP_ADDR}
+          EOF
       
       # Start frontend and backend containers using Docker Compose
       - name: Start fullstack setup via Docker Compose
