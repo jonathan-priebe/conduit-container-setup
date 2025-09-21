@@ -109,7 +109,8 @@ jobs:
       # Perform health check on backend (port 3000), expect HTTP 200 or 202
       - name: Health check backend (port 3000)
         run: |
-          curl -I localhost:3000/api/ | grep -E "200|202"
+          docker compose exec -T conduit-frontend \
+          curl -I http://conduit-backend:3000/api/ | grep -E "200|202"
         
       # Perform health check on frontend (port 8282), expect HTTP 200 or 202
       - name: Health check frontend (port 8282)
