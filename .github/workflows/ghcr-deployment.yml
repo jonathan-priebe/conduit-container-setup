@@ -8,8 +8,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_BACKEND: ${{ github.repository_owner }}/conduit-backend
-  IMAGE_FRONTEND: ${{ github.repository_owner }}/conduit-frontend
+  IMAGE_BACKEND: conduit-backend
+  IMAGE_FRONTEND: conduit-frontend
 
 jobs:
   build-and-push:
