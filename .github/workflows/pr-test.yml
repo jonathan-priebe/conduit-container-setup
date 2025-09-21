@@ -117,7 +117,3 @@ jobs:
         run: |
           curl -I http://localhost:8282 | grep -E "200|202"
         
-      # Shut down all containers and remove network
-      - name: Cleanup
-        run: docker-compose down
-        
