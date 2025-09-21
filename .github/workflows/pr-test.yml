@@ -93,6 +93,11 @@ jobs:
       - name: Wait for services to stabilize
         run: sleep 10
         
+      
+      #Check running container
+      - name:
+        run: docker ps
+      
       # Perform health check on backend (port 3000), expect HTTP 200 or 202
       - name: Health check backend (port 3000)
         run: |
