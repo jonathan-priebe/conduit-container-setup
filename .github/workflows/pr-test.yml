@@ -105,16 +105,11 @@ jobs:
       # Wait briefly to allow services to initialize
       - name: Wait for services to stabilize
         run: sleep 10
-        
-      
-      #Check running container
-      - name:
-        run: docker ps
       
       # Perform health check on backend (port 3000), expect HTTP 200 or 202
       - name: Health check backend (port 3000)
         run: |
-          ping -c 4 ${{ env.BACKEND_NAME }}
+          curl -I localhost:3000/api/ | grep -E "200|202"
         
       # Perform health check on frontend (port 8282), expect HTTP 200 or 202
       - name: Health check frontend (port 8282)
