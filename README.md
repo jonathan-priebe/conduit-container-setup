@@ -10,7 +10,8 @@ This repository provides a complete Docker-based setup for the RealWorld Conduit
 ## Table of Contents  
 - [Prerequisites](#prerequisites)  
 - [Quickstart](#quickstart)  
-- [Usage](#usage)  
+- [Usage](#usage)
+- - [Pipelines](#pipelines)  
 - [Me](#me)
 
 ---
@@ -97,6 +98,10 @@ All key settings are controlled via environment variables and Docker volumes. Yo
 ```bash
 http://YOUR_IP_OR_DOMAIN:YOUR_FRONTEND_PORT
 ```
+
+### Pipelines
+
+For a Pipeline documentation visit [Workflows.md](.github/workflows/Workflows.md)
 
 ## Me  
 
