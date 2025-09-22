@@ -3,7 +3,8 @@ This repository provides a complete Docker-based setup for the RealWorld Conduit
 
 ## Project Handover  
 
-📄 [Project Documentation PDF](<./Conduit Container Checkliste.pdf>)
+📄 [Conduit Container Checkliste PDF](<./Conduit Container Checkliste.pdf>)
+📄 [Conduit Deployment Checkliste PDF](<./Conduit Deployment Checkliste.pdf>)
 
 ---
 

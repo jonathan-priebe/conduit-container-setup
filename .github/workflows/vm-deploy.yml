@@ -30,3 +30,8 @@ jobs:
             cd ${{ secrets.VM_PATH }}   # Adjust path to your compose project
             docker compose down
             docker compose up -d
+
+      # Dump logs if any of the above steps failed
+      - name: Dump docker-compose logs on failure
+        if: failure()
+        run: docker compose logs
