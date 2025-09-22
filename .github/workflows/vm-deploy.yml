@@ -1,0 +1,34 @@
+name: VM Deployment
+
+on:
+  workflow_dispatch:   
+  #push:
+    #branches: [main]   
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Connect to VM via SSH and run deployment commands
+      - name: Deploy to VM via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VM_HOST }}        # VM hostname or IP
+          username: ${{ secrets.VM_USER }}    # SSH user
+          key: ${{ secrets.VM_SSH_KEY }}      # Private SSH key
+          script: |
+            echo "Logging in to GHCR..."
+            docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+            
+            echo "Pulling latest images..."
+            docker pull ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}/conduit-backend:latest
+            docker pull ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}/conduit-frontend:latest
+
+            echo "Restarting containers..."
+            cd ${{ secrets.VM_PATH }}   # Adjust path to your compose project
+            docker compose down
+            docker compose up -d

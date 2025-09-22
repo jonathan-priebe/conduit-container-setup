@@ -1,6 +1,7 @@
 name: Deployment Workflow Build and Push
 
 on:
+  workflow_dispatch: 
   push:
     branches: [main, dev-abgabe]    
     tags:

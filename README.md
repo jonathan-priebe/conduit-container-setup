@@ -78,7 +78,7 @@ All key settings are controlled via environment variables and Docker volumes. Yo
 | `DJANGO_SUPERUSER_EMAIL`    | Email address for Django admin user            |
 | `DJANGO_SUPERUSER_PASSWORD` | Password for Django admin user                 |
 | `SECRET_KEY_Django`         | Secret key for Django cryptographic signing    |
-| `API_URL`                   | Base path for backend API                      |
+| `API_URL`                   | Base path for backend API # Only for building  |
 
 ---
 

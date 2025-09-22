@@ -1,6 +1,8 @@
 services:
   conduit-backend:
-    image: ghcr.io/jonathan-priebe/conduit-container-setup/conduit-backend:latest
+    build:
+      context: ./conduit-backend
+      dockerfile: Dockerfile
     container_name: conduit-backend
     networks:
       - conduit-net
@@ -11,7 +13,11 @@ services:
     restart: on-failure
 
   conduit-frontend:
-    image: ghcr.io/jonathan-priebe/conduit-container-setup/conduit-frontend:latest
+    build:
+      context: ./conduit-frontend
+      dockerfile: Dockerfile
+      args:
+        API_URL: ${API_URL}
     container_name: conduit-frontend
     networks:
       - conduit-net
