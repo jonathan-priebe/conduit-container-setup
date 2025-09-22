@@ -3,7 +3,7 @@ name: Deployment Workflow Build and Push
 on:
   workflow_dispatch: 
   push:
-    branches: [main]    
+    branches: [main, dev-abgabe]    
     tags:
       - 'v*.*'              
 
@@ -11,6 +11,7 @@ env:
   REGISTRY: ghcr.io
   IMAGE_BACKEND: conduit-backend
   IMAGE_FRONTEND: conduit-frontend
+  API_URL: /api
 
 jobs:
   build-and-push:
@@ -54,6 +55,8 @@ jobs:
           context: ${{ env.IMAGE_FRONTEND }}
           file: ${{ env.IMAGE_FRONTEND }}/Dockerfile
           push: true
+          build-args: |
+            API_URL=${{ env.API_URL }}
           tags: |
             ${{ env.REGISTRY }}/${{ github.repository }}/${{ env.IMAGE_FRONTEND }}:latest
             ${{ env.REGISTRY }}/${{ github.repository }}/${{ env.IMAGE_FRONTEND }}:${{ github.sha }}
