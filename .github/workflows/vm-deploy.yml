@@ -1,9 +1,7 @@
 name: VM Deployment
 
 on:
-  workflow_dispatch:   
-  push:
-    branches: [dev-abgabe]   
+  workflow_dispatch:  
 
 jobs:
   deploy:
