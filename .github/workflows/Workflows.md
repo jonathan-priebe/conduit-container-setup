@@ -6,8 +6,8 @@ This document describes the GitHub Actions workflows in this repository and thei
 
 ## Table of Contents
 - [PR Test Workflow (`pr-test.yml`)](#-pr-test-workflow-pr-testyml)
-- [GHCR Deployment Workflow (`ghcr-deploymentyml`)](#-ghcr-deployment-workflow-ghcr-deploymentyml)
-- [VM Deployment Workflow (`vm-deployyml`)](#-vm-deployment-workflow-vm-deployyml)
+- [GHCR Deployment Workflow (`ghcr-deployment.yml`)](#-ghcr-deployment-workflow-ghcr-deploymentyml)
+- [VM Deployment Workflow (`vm-deploy.yml`)](#-vm-deployment-workflow-vm-deployyml)
 
 ---
 

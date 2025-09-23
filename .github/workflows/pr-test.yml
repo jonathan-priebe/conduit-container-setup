@@ -8,7 +8,6 @@ on:
 
 # Shared environment variables used across all jobs
 env:
-  GH_TOKEN: ${{ secrets.GH_TOKEN }}
   BACKEND_NAME: conduit-backend         # Used as backend folder and image name
   FRONTEND_NAME: conduit-frontend       # Used as frontend folder and image name
   CORS_ALLOWED_ORIGINS: http://localhost:8282  # Dummy CORS origin for backend
@@ -48,6 +47,7 @@ jobs:
         run: |
           docker run --rm \
           -v $(pwd)/ci_artifacts:/ci_artifacts \
+          -e GH_TOKEN=${{ secrets.GH_TOKEN }}
           -e CI_MODE=true \
           -e CORS_ALLOWED_ORIGINS="${{ env.CORS_ALLOWED_ORIGINS }}" \
           -e SECRET_KEY_Django="${{ env.SECRET_KEY_Django }}" \
@@ -95,6 +95,7 @@ jobs:
           DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL}
           DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}
           IP_ADDR=${IP_ADDR}
+          GH_TOKEN=${{ secrets.GH_TOKEN }}
           EOF
       
       # Start frontend and backend containers using Docker Compose
