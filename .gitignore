@@ -14,3 +14,6 @@ logs/
 
 #Docker
 *.pid
+
+# Secrets for pipe
+.github/workflows/.secrets

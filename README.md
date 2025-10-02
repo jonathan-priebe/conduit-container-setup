@@ -3,14 +3,16 @@ This repository provides a complete Docker-based setup for the RealWorld Conduit
 
 ## Project Handover  
 
-📄 [Project Documentation PDF](<./Conduit Container Checkliste.pdf>)
+📄 [Conduit Container Checkliste PDF](<./Conduit Container Checkliste.pdf>)
+📄 [Conduit Deployment Checkliste PDF](<./Conduit Deployment Checkliste.pdf>)
 
 ---
 
 ## Table of Contents  
 - [Prerequisites](#prerequisites)  
 - [Quickstart](#quickstart)  
-- [Usage](#usage)  
+- [Usage](#usage)
+- - [Pipelines](#pipelines)  
 - [Me](#me)
 
 ---
@@ -78,7 +80,7 @@ All key settings are controlled via environment variables and Docker volumes. Yo
 | `DJANGO_SUPERUSER_EMAIL`    | Email address for Django admin user            |
 | `DJANGO_SUPERUSER_PASSWORD` | Password for Django admin user                 |
 | `SECRET_KEY_Django`         | Secret key for Django cryptographic signing    |
-| `API_URL`                   | Base path for backend API                      |
+| `API_URL`                   | Base path for backend API # Only for building  |
 
 ---
 
@@ -91,19 +93,16 @@ All key settings are controlled via environment variables and Docker volumes. Yo
 
 ---
 
-### 📦 Frontend Configuration (Angular)
-
-| Variable               | Description                                      |
-|------------------------|--------------------------------------------------|
-| `FRONTEND_PORT`        | Port exposed for Angular frontend                |
-| `FRONTEND_API_URL`     | Full URL to access backend API from frontend     |
-
 3. **🚀 Access Conduit App/Interface**
 
 - Once running, access the **Angular Frontend** at:
 ```bash
 http://YOUR_IP_OR_DOMAIN:YOUR_FRONTEND_PORT
 ```
+
+### Pipelines
+
+For a Pipeline documentation visit [Workflows.md](.github/workflows/Workflows.md)
 
 ## Me  
 
